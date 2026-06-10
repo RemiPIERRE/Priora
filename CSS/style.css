@@ -7,17 +7,13 @@
     --color-accent: #C4703A;
     --color-text: #6B4F3A;
     --color-muted: #9E9488;
-
     --font-heading: 'Indie Flower', cursive;
     --font-body: 'Lora', serif;
-
     --radius-sm: 8px;
     --radius-md: 14px;
     --radius-lg: 18px;
-
     --shadow-sm: 0 4px 16px rgba(107, 79, 58, 0.10);
     --shadow-md: 0 8px 24px rgba(107, 79, 58, 0.18);
-
     --transition: 0.25s ease;
 }
 
@@ -164,7 +160,6 @@ footer {
     gap: 0.1rem;
     min-width: 160px;
     z-index: 50;
-
     opacity: 0;
     pointer-events: none;
     transform: translateY(-6px);
@@ -233,7 +228,6 @@ footer {
     align-items: center;
     justify-content: center;
     z-index: 100;
-
     opacity: 0;
     pointer-events: none;
     transition: opacity var(--transition);
@@ -266,6 +260,17 @@ footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.modal__title-wrapper {
+    flex: 1;
+}
+
+.modal__header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
 }
 
 .modal__title {
@@ -314,10 +319,16 @@ footer {
     letter-spacing: 0.01em;
 }
 
+.field__label-row {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
 .field__input {
     background-color: #fff;
     border: 1px solid var(--color-surface);
-    border-radius: var(--radius-sm) + 2px;
+    border-radius: var(--radius-sm);
     padding: 0.65rem 0.9rem;
     font-family: var(--font-body);
     font-size: 0.95rem;
@@ -356,11 +367,45 @@ footer {
     font-size: 0.85rem;
 }
 
+.btn-edit-field {
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    padding: 0.15rem 0.3rem;
+    border-radius: 4px;
+    transition: color var(--transition), background-color var(--transition);
+    line-height: 1;
+}
+
+.btn-edit-field:hover {
+    color: var(--color-accent);
+    background-color: var(--color-surface);
+}
+
+.card-view__description {
+    font-size: 0.9rem;
+    color: var(--color-text);
+    opacity: 0.85;
+    line-height: 1.6;
+    min-height: 1.2rem;
+}
+
+.annotation-item {
+    font-size: 0.82rem;
+    color: var(--color-text);
+    background-color: #FDF6E3;
+    border-left: 3px solid var(--color-accent);
+    padding: 0.4rem 0.6rem;
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+    line-height: 1.5;
+    margin-bottom: 0.4rem;
+}
+
 .btn-primary {
     background-color: var(--color-accent);
     color: #fff;
     padding: 0.6rem 1.25rem;
-    border-radius: var(--radius-sm) + 2px;
+    border-radius: var(--radius-sm);
     font-size: 0.9rem;
     font-weight: 500;
     transition: background-color var(--transition), transform var(--transition);
@@ -375,7 +420,7 @@ footer {
     background-color: transparent;
     color: var(--color-muted);
     padding: 0.6rem 1.25rem;
-    border-radius: var(--radius-sm) + 2px;
+    border-radius: var(--radius-sm);
     font-size: 0.9rem;
     transition: background-color var(--transition), color var(--transition);
 }

@@ -25,15 +25,10 @@
                 </svg>
             </button>
             <div class="settings-popover" id="settingsPopover">
-                <button class="settings-popover__btn" id="btnExport">
-                    <span>↓</span> Export
-                </button>
-                <button class="settings-popover__btn" id="btnImport">
-                    <span>↑</span> Import
-                </button>
-                <button class="settings-popover__btn settings-popover__btn--edit" id="btnEdit">
-                    <span>✎</span> Edit
-                </button>
+                <button class="settings-popover__btn" id="btnExport"><span>↓</span> Export</button>
+                <button class="settings-popover__btn" id="btnImport"><span>↑</span> Import</button>
+                <button class="settings-popover__btn settings-popover__btn--edit" id="btnEdit"><span>✎</span>
+                    Edit</button>
                 <input type="file" id="importFileInput" accept=".json" style="display:none;" />
             </div>
         </div>
@@ -41,12 +36,10 @@
 
     <main>
         <section class="board-grid" aria-label="My boards">
-
             <article class="board-card board-card--new" role="button" aria-label="Create a new board">
                 <span class="board-card__plus">+</span>
                 <p class="board-card__label">New board</p>
             </article>
-
         </section>
     </main>
 
@@ -56,20 +49,16 @@
 
     <div class="modal-overlay" id="newBoardModal" aria-modal="true" role="dialog" aria-label="Create a new board">
         <div class="modal">
-
             <div class="modal__header">
                 <h2 class="modal__title">New board</h2>
                 <button class="modal__close" aria-label="Close">&times;</button>
             </div>
-
             <div class="modal__body">
-
                 <div class="field">
                     <label class="field__label" for="boardTitle">Board title</label>
                     <input class="field__input" type="text" id="boardTitle" placeholder="Ex: Website redesign…"
                         maxlength="40" />
                 </div>
-
                 <div class="field">
                     <label class="field__label">Board color</label>
                     <div class="color-palette">
@@ -91,14 +80,11 @@
                             data-color="#C47A7A"></button>
                     </div>
                 </div>
-
             </div>
-
             <div class="modal__footer">
                 <button class="btn-secondary" id="cancelNewBoard">Cancel</button>
                 <button class="btn-primary">Create board</button>
             </div>
-
         </div>
     </div>
 

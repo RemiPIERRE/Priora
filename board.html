@@ -15,7 +15,6 @@
     <header>
         <a href="index.html" class="btn-home" aria-label="Back to home">Home</a>
         <h1>Priora</h1>
-
         <div class="header__settings">
             <button class="btn-settings" id="btnSettings" aria-label="Settings">
                 <svg class="gear" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
@@ -26,15 +25,10 @@
                 </svg>
             </button>
             <div class="settings-popover" id="settingsPopover">
-                <button class="settings-popover__btn" id="btnExport">
-                    <span>↓</span> Export
-                </button>
-                <button class="settings-popover__btn" id="btnImport">
-                    <span>↑</span> Import
-                </button>
-                <button class="settings-popover__btn settings-popover__btn--edit" id="btnEdit">
-                    <span>✎</span> Edit
-                </button>
+                <button class="settings-popover__btn" id="btnExport"><span>↓</span> Export</button>
+                <button class="settings-popover__btn" id="btnImport"><span>↑</span> Import</button>
+                <button class="settings-popover__btn settings-popover__btn--edit" id="btnEdit"><span>✎</span>
+                    Edit</button>
                 <input type="file" id="importFileInput" accept=".json" style="display:none;" />
             </div>
         </div>
@@ -43,25 +37,19 @@
     <div class="layout">
 
         <div class="sidebar-wrapper">
-
             <aside class="sidebar" aria-label="My boards">
                 <h2 class="sidebar__title">My boards</h2>
                 <nav>
-                    <ul class="sidebar__list">
-                    </ul>
+                    <ul class="sidebar__list"></ul>
                 </nav>
             </aside>
-
             <button class="btn-sidebar-toggle btn-sidebar--collapse" aria-label="Collapse sidebar">&#8249;</button>
             <button class="btn-sidebar-toggle btn-sidebar--expand" aria-label="Expand sidebar"
                 style="display: none;">&#8250;</button>
-
         </div>
 
         <main class="kanban">
-
             <h2 class="kanban__title"></h2>
-
             <div class="kanban__columns">
 
                 <section class="column" aria-label="To-Do">
@@ -92,7 +80,6 @@
                 </section>
 
             </div>
-
         </main>
 
     </div>
@@ -103,26 +90,21 @@
 
     <div class="modal-overlay" id="newCardModal" aria-modal="true" role="dialog" aria-label="Add a card">
         <div class="modal">
-
             <div class="modal__header">
                 <h2 class="modal__title">New card</h2>
                 <button class="modal__close" aria-label="Close">&times;</button>
             </div>
-
             <div class="modal__body">
-
                 <div class="field">
                     <label class="field__label" for="cardTitle">Title</label>
                     <input class="field__input" type="text" id="cardTitle" placeholder="Ex: Choose the color palette…"
                         maxlength="80" />
                 </div>
-
                 <div class="field">
                     <label class="field__label" for="cardDescription">Description</label>
                     <textarea class="field__input field__textarea" id="cardDescription" placeholder="Describe the task…"
                         rows="3"></textarea>
                 </div>
-
                 <div class="field">
                     <label class="field__label" for="cardAnnotation">
                         <span class="field__label-icon">📝</span> Annotation
@@ -130,14 +112,53 @@
                     <textarea class="field__input field__textarea field__textarea--annotation" id="cardAnnotation"
                         placeholder="A quick note, an idea on the fly…" rows="2"></textarea>
                 </div>
-
             </div>
-
             <div class="modal__footer">
                 <button class="btn-secondary" id="cancelNewCard">Cancel</button>
                 <button class="btn-primary">Add card</button>
             </div>
+        </div>
+    </div>
 
+    <div class="modal-overlay" id="editCardModal" aria-modal="true" role="dialog" aria-label="Edit card">
+        <div class="modal">
+            <div class="modal__header">
+                <div class="modal__title-wrapper">
+                    <h2 class="modal__title" id="editCardTitleDisplay"></h2>
+                    <input class="field__input" id="editCardTitleInput" type="text" maxlength="80"
+                        style="display:none;" />
+                </div>
+                <div class="modal__header-actions">
+                    <button class="btn-edit-field" id="btnEditTitle" aria-label="Edit title">✎</button>
+                    <button class="modal__close" id="closeEditCard" aria-label="Close">&times;</button>
+                </div>
+            </div>
+            <div class="modal__body">
+                <div class="field">
+                    <div class="field__label-row">
+                        <label class="field__label">Description</label>
+                        <button class="btn-edit-field" id="btnEditDescription" aria-label="Edit description">✎</button>
+                    </div>
+                    <p class="card-view__description" id="editCardDescDisplay"></p>
+                    <textarea class="field__input field__textarea" id="editCardDescInput" rows="3"
+                        style="display:none;"></textarea>
+                </div>
+                <div class="field">
+                    <label class="field__label">Annotations</label>
+                    <div id="annotationsList"></div>
+                </div>
+                <div class="field">
+                    <label class="field__label" for="newAnnotationInput">
+                        <span class="field__label-icon">📝</span> Add an annotation
+                    </label>
+                    <textarea class="field__input field__textarea field__textarea--annotation" id="newAnnotationInput"
+                        placeholder="A quick note, an idea on the fly…" rows="2"></textarea>
+                </div>
+            </div>
+            <div class="modal__footer">
+                <button class="btn-secondary" id="cancelEditCard">Close</button>
+                <button class="btn-primary" id="saveEditCard">Save</button>
+            </div>
         </div>
     </div>
 
