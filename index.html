@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Priora</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/index.css" />
+</head>
+
+<body class="page-home">
+
+    <!-- ========== HEADER ========== -->
+    <header>
+        <h1>Priora</h1>
+        <p>Stay focus, on what matters.</p>
+
+        <div class="header__settings">
+            <button class="btn-settings" id="btnSettings" aria-label="Settings">
+                <svg class="gear" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="3" />
+                    <path
+                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                </svg>
+            </button>
+            <div class="settings-popover" id="settingsPopover">
+                <button class="settings-popover__btn" id="btnExport">
+                    <span>↓</span> Export
+                </button>
+                <button class="settings-popover__btn" id="btnImport">
+                    <span>↑</span> Import
+                </button>
+                <button class="settings-popover__btn settings-popover__btn--edit" id="btnEdit">
+                    <span>✎</span> Edit
+                </button>
+                <input type="file" id="importFileInput" accept=".json" style="display:none;" />
+            </div>
+        </div>
+    </header>
+
+    <!-- ========== MAIN ========== -->
+    <main>
+        <section class="board-grid" aria-label="My boards">
+
+            <!-- Board cards are injected here by JS -->
+
+            <!-- New board button -->
+            <article class="board-card board-card--new" role="button" aria-label="Create a new board">
+                <span class="board-card__plus">+</span>
+                <p class="board-card__label">New board</p>
+            </article>
+
+        </section>
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+        <p>Priora &nbsp;•&nbsp; 2026</p>
+    </footer>
+
+    <!-- ========== MODAL: NEW BOARD ========== -->
+    <div class="modal-overlay" id="newBoardModal" aria-modal="true" role="dialog" aria-label="Create a new board">
+        <div class="modal">
+
+            <div class="modal__header">
+                <h2 class="modal__title">New board</h2>
+                <button class="modal__close" aria-label="Close">&times;</button>
+            </div>
+
+            <div class="modal__body">
+
+                <div class="field">
+                    <label class="field__label" for="boardTitle">Board title</label>
+                    <input class="field__input" type="text" id="boardTitle" placeholder="Ex: Website redesign…"
+                        maxlength="40" />
+                </div>
+
+                <div class="field">
+                    <label class="field__label">Board color</label>
+                    <div class="color-palette">
+                        <button class="color-swatch color-swatch--selected" style="background-color: #C4703A;"
+                            aria-label="Ember" data-color="#C4703A"></button>
+                        <button class="color-swatch" style="background-color: #7B9E87;" aria-label="Sage"
+                            data-color="#7B9E87"></button>
+                        <button class="color-swatch" style="background-color: #7A8FAD;" aria-label="Slate"
+                            data-color="#7A8FAD"></button>
+                        <button class="color-swatch" style="background-color: #B07A9E;" aria-label="Mauve"
+                            data-color="#B07A9E"></button>
+                        <button class="color-swatch" style="background-color: #C4A35A;" aria-label="Ochre"
+                            data-color="#C4A35A"></button>
+                        <button class="color-swatch" style="background-color: #8E7B6B;" aria-label="Taupe"
+                            data-color="#8E7B6B"></button>
+                        <button class="color-swatch" style="background-color: #A0B89A;" aria-label="Moss"
+                            data-color="#A0B89A"></button>
+                        <button class="color-swatch" style="background-color: #C47A7A;" aria-label="Terracotta"
+                            data-color="#C47A7A"></button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal__footer">
+                <button class="btn-secondary" id="cancelNewBoard">Cancel</button>
+                <button class="btn-primary">Create board</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>
