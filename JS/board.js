@@ -28,7 +28,10 @@ const buildCardElement = (card) => {
     article.className = 'card';
     article.dataset.id = card.id;
 
-    var html = '<h4 class="card__title">' + card.title + '</h4>';
+    console.log('color : ' + card.pColor)
+    var html = '<button class="btn-priority" style="background-color: ' + (card.pColor || '#5bb179') + ';" aria-label="medium"></button>'
+    html += '<h4 class="card__title">' + card.title + '</h4>';
+
     if (card.description) html += '<p class="card__description">' + card.description + '</p>';
 
     var annotations = Array.isArray(card.annotations) ? card.annotations : (card.annotation ? [card.annotation] : []);
@@ -133,12 +136,13 @@ const initNewCardModal = () => {
     var openModal = function (columnKey) { activeColumn = columnKey; overlay.classList.add('visible'); if (inputTitle) inputTitle.focus(); };
     var closeModal = function () { overlay.classList.remove('visible'); overlay.querySelectorAll('input, textarea').forEach(function (field) { field.value = ''; }); };
     var createCard = function () {
+        var selectedPriority = $('.color-spriority--selected');
         if (!inputTitle) return;
         var title = inputTitle.value.trim();
         if (!title) { inputTitle.focus(); return; }
         var board = getCurrentBoard();
         if (!board) return;
-        Storage.addCard(board.id, activeColumn, title, inputDesc ? inputDesc.value.trim() : '', inputNote ? inputNote.value.trim() : '');
+        Storage.addCard(board.id, activeColumn, selectedPriority, title, inputDesc ? inputDesc.value.trim() : '', inputNote ? inputNote.value.trim() : '');
         renderCards(board.id);
         closeModal();
     };
@@ -261,6 +265,20 @@ const initEditCardModal = () => {
     window.openEditCardModal = openModal;
 };
 
+const initPriorityPalette = () => {
+    var sprioritys = $$('.color-spriority');
+    if (!sprioritys.length) return;
+
+    sprioritys.forEach(function (spriority) {
+        spriority.addEventListener('click', function () {
+            sprioritys.forEach(function (s) {
+                s.classList.remove('color-spriority--selected');
+            });
+            spriority.classList.add('color-spriority--selected');
+        });
+    });
+};
+
 const initDragDrop = (boardId) => {
     var cardZones = $$('.column__cards');
     if (!cardZones.length) return;
@@ -308,4 +326,5 @@ document.addEventListener('DOMContentLoaded', function () {
     initSidebar();
     initNewCardModal();
     initEditCardModal();
+    initPriorityPalette();
 });

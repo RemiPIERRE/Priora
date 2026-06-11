@@ -35,13 +35,14 @@ const Storage = {
         Storage.saveBoards(boards);
         Storage.saveCards(cards);
     },
-    addCard(boardId, column, title, description, annotation) {
+    addCard(boardId, column, priority, title, description, annotation) {
         const cards = Storage.getCards();
         const columnCards = cards.filter(function (card) { return card.boardId === boardId && card.column === column; });
         const newCard = {
             id: generateId(),
             boardId: boardId,
             column: column,
+            pColor: priority.getAttribute('data-color'),
             title: title,
             description: description,
             annotations: annotation ? [annotation] : [],

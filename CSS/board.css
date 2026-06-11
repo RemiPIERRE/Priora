@@ -262,3 +262,44 @@ body.page-board {
     transform: rotate(1.5deg) scale(1.02);
     cursor: grabbing;
 }
+
+.field__priority {
+    display: flex;
+    justify-content: space-between;
+}
+
+.color-spriority {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    transition: transform var(--transition), border-color var(--transition);
+}
+
+.color-spriority:hover {
+    transform: scale(1.15);
+}
+
+.color-spriority--selected {
+    border-color: var(--color-text);
+    transform: scale(1.15);
+}
+
+.priority-palette {
+    display: flex;
+    justify-content: right;
+    gap: 0.6rem
+}
+
+.btn-priority {
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    width: 22px;
+    height: 22px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    z-index: 5;
+}
