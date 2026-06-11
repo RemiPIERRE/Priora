@@ -28,7 +28,6 @@ const buildCardElement = (card) => {
     article.className = 'card';
     article.dataset.id = card.id;
 
-    console.log('color : ' + card.pColor)
     var html = '<button class="btn-priority" style="background-color: ' + (card.pColor || '#5bb179') + ';" aria-label="medium"></button>'
     html += '<h4 class="card__title">' + card.title + '</h4>';
 
