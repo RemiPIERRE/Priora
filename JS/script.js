@@ -92,11 +92,22 @@ const initSettings = () => {
         if (isEditMode) { deactivateEditMode(); } else { rotateClose(); }
     };
 
-    const body = $('.page-home');
 
-    const activateEditMode = () => { isEditMode = true; isOpen = false; popover.classList.remove('visible'); body.classList.add('edit-mode'); showDeleteButtons(); };
-    const deactivateEditMode = () => { isEditMode = false; hideDeleteButtons(); body.classList.remove('edit-mode'); rotateClose(); };
+    const activateEditMode = () => {
+        isEditMode = true;
+        isOpen = false;
+        popover.classList.remove('visible');
+        document.body.classList.add('edit-mode');
+        showDeleteButtons();
+    };
 
+    const deactivateEditMode = () => {
+        isEditMode = false;
+        hideDeleteButtons();
+        document.body.classList.remove('edit-mode');
+        rotateClose();
+    };
+    
     btnSettings.addEventListener('click', function (event) {
         event.stopPropagation();
         if (isEditMode) { deactivateEditMode(); return; }
