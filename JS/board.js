@@ -24,12 +24,14 @@ const getColumnKey = (label) => {
 };
 
 const buildCardElement = (card) => {
+    var priorities = ['low', 'medium', 'high'];
+
     var article = document.createElement('article');
     article.className = 'card';
     if (card.column === 'done') article.className = 'card card--compact';
     article.dataset.id = card.id;
 
-    var html = '<button class="btn-priority" style="background-color: ' + (card.pColor || '#5bb179') + ';" aria-label="medium"></button>'
+    var html = '<button class="btn-priority" style="background-color: ' + (card.priorityColor || '#5bb179') + ';" aria-label="' + (card.priorityLabel || 'low') + '"></button>'
     html += '<h4 class="card__title">' + card.title + '</h4>';
 
     if (card.description) html += '<p class="card__description">' + card.description + '</p>';
@@ -40,6 +42,25 @@ const buildCardElement = (card) => {
     });
 
     article.innerHTML = html;
+
+    var btnPriority = article.querySelector('.btn-priority');
+    if (btnPriority) {
+        btnPriority.addEventListener('click', function (event) {
+            event.stopPropagation();
+            prtLabel = btnPriority.getAttribute('aria-label')
+            for (var i = 0; priorities[i]; i++) {
+                if (prtLabel == priorities[i]) {
+                    newPriority = priorities[i] == 'high' ? priorities[0] : priorities[i + 1];
+                    break;
+                }
+            }
+            var nextSwatch = $('[aria-label="' + newPriority + '"].color-spriority');
+            var newColor = nextSwatch ? nextSwatch.getAttribute('data-color') : '#5bb179';
+            btnPriority.style.backgroundColor = newColor;
+            btnPriority.setAttribute('aria-label', newPriority);
+            Storage.updateCardPriority(card.id, newPriority, newColor);
+        });
+    }
 
     article.addEventListener('click', function () {
         if (window.openEditCardModal) window.openEditCardModal(card.id);
@@ -142,7 +163,8 @@ const initNewCardModal = () => {
         if (!title) { inputTitle.focus(); return; }
         var board = getCurrentBoard();
         if (!board) return;
-        Storage.addCard(board.id, activeColumn, selectedPriority, title, inputDesc ? inputDesc.value.trim() : '', inputNote ? inputNote.value.trim() : '');
+        selectedPriorityLabel = selectedPriority.getAttribute('aria-label')
+        Storage.addCard(board.id, activeColumn, selectedPriority, selectedPriorityLabel, title, inputDesc ? inputDesc.value.trim() : '', inputNote ? inputNote.value.trim() : '');
         renderCards(board.id);
         closeModal();
     };

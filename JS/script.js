@@ -46,14 +46,15 @@ const Storage = {
             }
         }
     },
-    addCard(boardId, column, priority, title, description, annotation) {
+    addCard(boardId, column, priority, label, title, description, annotation) {
         const cards = Storage.getCards();
         const columnCards = cards.filter(function (card) { return card.boardId === boardId && card.column === column; });
         const newCard = {
             id: generateId(),
             boardId: boardId,
             column: column,
-            pColor: priority.getAttribute('data-color'),
+            priorityColor: priority.getAttribute('data-color'),
+            priorityLabel: label,
             title: title,
             description: description,
             annotations: annotation ? [annotation] : [],
@@ -66,6 +67,17 @@ const Storage = {
     deleteCard(cardId) {
         const cards = Storage.getCards().filter(function (card) { return card.id !== cardId; });
         Storage.saveCards(cards);
+    },
+    updateCardPriority(cardId, priority, color) {
+        const cards = Storage.getCards();
+        for (let i = 0; i < cards.length; i++) {
+            if (cards[i].id === cardId) {
+                cards[i].priorityLabel = priority;
+                cards[i].priorityColor = color;
+                Storage.saveCards(cards);
+                return;
+            }
+        }
     },
     getCardsByBoard(boardId) {
         return Storage.getCards().filter(function (card) { return card.boardId === boardId; });
@@ -107,7 +119,7 @@ const initSettings = () => {
         document.body.classList.remove('edit-mode');
         rotateClose();
     };
-    
+
     btnSettings.addEventListener('click', function (event) {
         event.stopPropagation();
         if (isEditMode) { deactivateEditMode(); return; }

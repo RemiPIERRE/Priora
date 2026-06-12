@@ -198,6 +198,7 @@ body.page-board {
     border-radius: var(--radius-md);
     padding: 1rem;
     box-shadow: var(--shadow-sm);
+    user-select: none;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
