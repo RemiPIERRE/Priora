@@ -34,7 +34,7 @@ const buildCardElement = (card) => {
     var html = '<button class="btn-priority" style="background-color: ' + (card.priorityColor || '#5bb179') + ';" aria-label="' + (card.priorityLabel || 'low') + '"></button>'
     html += '<h4 class="card__title">' + card.title + '</h4>';
 
-    if (card.description) html += '<p class="card__description">' + card.description + '</p>';
+    if (card.description) { html += '<p class="card__description">' + card.description.replace(/\n/g, '<br>') + '</p>';};
 
     var annotations = Array.isArray(card.annotations) ? card.annotations : (card.annotation ? [card.annotation] : []);
     annotations.forEach(function (note) {
@@ -231,7 +231,7 @@ const initEditCardModal = () => {
         titleInput.value = card.title;
         toViewMode(titleDisplay, titleInput);
 
-        descDisplay.textContent = card.description || '';
+        descDisplay.innerHTML = (card.description || '').replace(/\n/g, '<br>');
         descInput.value = card.description || '';
         toViewMode(descDisplay, descInput);
 
