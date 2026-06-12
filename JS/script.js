@@ -35,6 +35,17 @@ const Storage = {
         Storage.saveBoards(boards);
         Storage.saveCards(cards);
     },
+    updateBoard(id, newTitle, color) {
+        const boards = Storage.getBoards();
+        for (let i = 0; i < boards.length; i++) {
+            if (boards[i].id === id) {
+                boards[i].title = newTitle;
+                boards[i].color = color;
+                Storage.saveBoards(boards);
+                return;
+            }
+        }
+    },
     addCard(boardId, column, priority, title, description, annotation) {
         const cards = Storage.getCards();
         const columnCards = cards.filter(function (card) { return card.boardId === boardId && card.column === column; });
@@ -81,8 +92,10 @@ const initSettings = () => {
         if (isEditMode) { deactivateEditMode(); } else { rotateClose(); }
     };
 
-    const activateEditMode = () => { isEditMode = true; isOpen = false; popover.classList.remove('visible'); showDeleteButtons(); };
-    const deactivateEditMode = () => { isEditMode = false; hideDeleteButtons(); rotateClose(); };
+    const body = $('.page-home');
+
+    const activateEditMode = () => { isEditMode = true; isOpen = false; popover.classList.remove('visible'); body.classList.add('edit-mode'); showDeleteButtons(); };
+    const deactivateEditMode = () => { isEditMode = false; hideDeleteButtons(); body.classList.remove('edit-mode'); rotateClose(); };
 
     btnSettings.addEventListener('click', function (event) {
         event.stopPropagation();

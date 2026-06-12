@@ -88,6 +88,49 @@
         </div>
     </div>
 
+    <div class="modal-overlay" id="editBoardModal" aria-modal="true" role="dialog" aria-label="Edit board">
+        <div class="modal">
+            <div class="modal__header">
+                <div class="modal__title-wrapper">
+                    <h2 class="modal__title" id="editBoardTitleDisplay"></h2>
+                    <input class="field__input" id="editBoardTitleInput" type="text" maxlength="80"
+                        style="display:none;" />
+                </div>
+                <div class="modal__header-actions">
+                    <button class="btn-edit-field" id="btnEditBoardTitle" aria-label="Edit title">✎</button>
+                    <button class="modal__close" id="closeEditBoard" aria-label="Close">&times;</button>
+                </div>
+            </div>
+            <div class="modal__body">
+                <div class="field">
+                    <label class="field__label">Board color</label>
+                    <div class="color-palette">
+                        <button class="color-swatch color-swatch--selected" style="background-color: #C4703A;"
+                            aria-label="Ember" data-color="#C4703A"></button>
+                        <button class="color-swatch" style="background-color: #7B9E87;" aria-label="Sage"
+                            data-color="#7B9E87"></button>
+                        <button class="color-swatch" style="background-color: #7A8FAD;" aria-label="Slate"
+                            data-color="#7A8FAD"></button>
+                        <button class="color-swatch" style="background-color: #B07A9E;" aria-label="Mauve"
+                            data-color="#B07A9E"></button>
+                        <button class="color-swatch" style="background-color: #C4A35A;" aria-label="Ochre"
+                            data-color="#C4A35A"></button>
+                        <button class="color-swatch" style="background-color: #8E7B6B;" aria-label="Taupe"
+                            data-color="#8E7B6B"></button>
+                        <button class="color-swatch" style="background-color: #A0B89A;" aria-label="Moss"
+                            data-color="#A0B89A"></button>
+                        <button class="color-swatch" style="background-color: #C47A7A;" aria-label="Terracotta"
+                            data-color="#C47A7A"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal__footer">
+                <button class="btn-secondary" id="cancelEditBoard">Cancel</button>
+                <button class="btn-primary">Edit board</button>
+            </div>
+        </div>
+    </div>
+
     <script src="JS/script.js"></script>
     <script src="JS/index.js"></script>
 </body>

@@ -32,7 +32,11 @@ const buildBoardCard = (board) => {
         '</div>';
 
     article.addEventListener('click', function () {
-        window.location.href = 'board.html?id=' + board.id;
+        if (document.body.classList.contains('edit-mode')) {
+            if (window.openEditBoardModal) window.openEditBoardModal(board.id);
+        }
+        else
+            window.location.href = 'board.html?id=' + board.id;
     });
 
     wrapper.appendChild(article);
@@ -117,6 +121,83 @@ const initNewBoardModal = () => {
     });
 };
 
+var currentBoardId = null;
+
+const initEditBoardModal = () => {
+    var overlay = $('#editBoardModal');
+    if (!overlay) return;
+
+    var btnClose = overlay.querySelector('.modal__close');
+    var btnCancel = $('#cancelEditBoard');
+    var btnEdit = overlay.querySelector('.btn-primary');
+    var titleDisplay = $('#editBoardTitleDisplay');
+    var titleInput = $('#editBoardTitleInput');
+    var btnEditTitle = $('#btnEditBoardTitle');
+
+    var openModal = function (boardId) {
+        currentBoardId = boardId;
+        var boards = Storage.getBoards();
+        var board = null;
+        for (var i = 0; i < boards.length; i++) { if (boards[i].id === boardId) { board = boards[i]; break; } }
+        if (!board) return;
+        overlay.classList.add('visible');
+        titleDisplay.textContent = board.title;
+        titleInput.value = board.title;
+        var swatches = $$('.color-swatch');
+        swatches.forEach(function (swatch) {
+            swatch.classList.remove('color-swatch--selected');
+            if (swatch.dataset.color === board.color) {
+                swatch.classList.add('color-swatch--selected');
+            }
+        });
+        toViewMode(titleDisplay, titleInput);
+    };
+
+    var closeModal = function () {
+        overlay.classList.remove('visible');
+        titleInput.value = '';
+        currentBoardId = null;
+        resetPalette();
+    };
+
+    var toViewMode = function (display, input) { display.style.display = ''; input.style.display = 'none'; };
+    var toEditMode = function (display, input) { display.style.display = 'none'; input.style.display = ''; input.focus(); };
+
+    var editBoard = function () {
+        var title = titleInput.value.trim();
+        if (!title) {
+            titleInput.focus();
+            return;
+        }
+
+        var selectedSwatch = $('.color-swatch--selected');
+        var color = selectedSwatch ? selectedSwatch.dataset.color : '#C4703A';
+
+        Storage.updateBoard(currentBoardId, title, color);
+        renderBoardCards();
+        closeModal();
+    };
+
+    if (btnClose) btnClose.addEventListener('click', closeModal);
+    if (btnCancel) btnCancel.addEventListener('click', closeModal);
+    if (btnEdit) btnEdit.addEventListener('click', editBoard);
+
+    overlay.addEventListener('click', function (event) {
+        if (event.target === overlay) closeModal();
+    });
+
+    btnEditTitle.addEventListener('click', function () {
+        if (titleInput.style.display === 'none') { titleInput.value = titleDisplay.textContent; toEditMode(titleDisplay, titleInput); }
+        else { titleDisplay.textContent = titleInput.value.trim() || titleDisplay.textContent; toViewMode(titleDisplay, titleInput); }
+    });
+
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') closeModal();
+    });
+
+    window.openEditBoardModal = openModal;
+}
+
 const initColorPalette = () => {
     var swatches = $$('.color-swatch');
     if (!swatches.length) return;
@@ -143,4 +224,5 @@ document.addEventListener('DOMContentLoaded', function () {
     renderBoardCards();
     initNewBoardModal();
     initColorPalette();
+    initEditBoardModal();
 });
