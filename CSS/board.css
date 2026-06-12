@@ -303,3 +303,16 @@ body.page-board {
     border: 3px solid transparent;
     z-index: 5;
 }
+
+.card--compact {
+    gap: 0.3rem;
+    .card__description {
+        display: none;
+    }
+    .card__annotation {
+        display: none;
+    }
+    .btn-priority {
+        display: none;
+    }
+}

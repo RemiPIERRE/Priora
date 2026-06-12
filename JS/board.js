@@ -26,6 +26,7 @@ const getColumnKey = (label) => {
 const buildCardElement = (card) => {
     var article = document.createElement('article');
     article.className = 'card';
+    if (card.column === 'done') article.className = 'card card--compact';
     article.dataset.id = card.id;
 
     var html = '<button class="btn-priority" style="background-color: ' + (card.pColor || '#5bb179') + ';" aria-label="medium"></button>'
@@ -313,7 +314,7 @@ const initDragDrop = (boardId) => {
                 }
 
                 Storage.saveCards(allCards);
-                updateCounters(boardId);
+                renderCards(boardId);
             },
         });
     });
